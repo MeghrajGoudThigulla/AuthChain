@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Add Seller | AuthChain</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Modern Styling -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/modern.css">
+	<style>
+		.form-control {
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px solid var(--glass-border);
+			color: white;
+			border-radius: 10px;
+		}
+
+		.form-control:focus {
+			background: rgba(255, 255, 255, 0.05);
+			border-color: var(--primary);
+			color: white;
+			box-shadow: none;
+		}
+
+		label {
+			color: var(--text-muted);
+			font-size: 0.85rem;
+			margin-bottom: 0.5rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="app-container">
+		<!-- Sidebar -->
+		<aside class="sidebar">
+			<div class="logo-area mb-5">
+				<h3 class="text-gradient"><i class="fas fa-cubes me-2"></i>AuthChain</h3>
+				<small class="text-muted">Distributor Management</small>
+			</div>
+
+			<nav class="nav-links">
+				<a href="index.html" class="nav-link-modern">
+					<i class="fas fa-home"></i> Dashboard
+				</a>
+				<a href="manufacturer-portal.html" class="nav-link-modern active">
+					<i class="fas fa-industry"></i> Manufacturer
+				</a>
+				<a href="seller-portal.html" class="nav-link-modern">
+					<i class="fas fa-store"></i> Seller Portal
+				</a>
+				<a href="consumer-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-tag"></i> Consumer View
+				</a>
+				<a href="admin-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-shield"></i> Admin Panel
+				</a>
+			</nav>
+		</aside>
+
+		<!-- Main Workspace -->
+		<main class="main-content animate-fade-in">
+			<header class="mb-5">
+				<a href="manufacturer-portal.html" class="text-muted text-decoration-none mb-3 d-inline-block">
+					<i class="fas fa-arrow-left me-2"></i> Back to Manufacturer
+				</a>
+				<h1 class="mb-1">Authorize <span class="text-gradient">New Seller</span></h1>
+				<p class="text-muted">Register a trusted distributor to authorize them for selling your genuine
+					products.</p>
+			</header>
+
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="glass-card p-4">
+						<div class="row g-4">
+							<div class="col-md-6">
+								<label for="SellerName">Business Name</label>
+								<input class="form-control" id="SellerName" type="text"
+									placeholder="e.g. Global Tech Retail" />
+							</div>
+							<div class="col-md-6">
+								<label for="SellerBrand">Brand/Category</label>
+								<input class="form-control" id="SellerBrand" type="text"
+									placeholder="e.g. Electronics" />
+							</div>
+							<div class="col-md-6">
+								<label for="SellerCode">Internal Seller Code</label>
+								<input class="form-control" id="SellerCode" type="text" placeholder="e.g. SELL-501" />
+							</div>
+							<div class="col-md-6">
+								<label for="SellerPhoneNumber">Contact Number</label>
+								<input class="form-control" id="SellerPhoneNumber" type="text"
+									placeholder="+1 (555) 000-0000" />
+							</div>
+							<div class="col-md-6">
+								<label for="SellerManager">Store Manager Name</label>
+								<input class="form-control" id="SellerManager" type="text" placeholder="Jane Doe" />
+							</div>
+							<div class="col-md-6">
+								<label for="SellerAddress">Wallet Address (Polygon)</label>
+								<input class="form-control" id="SellerAddress" type="text" placeholder="0x..." />
+							</div>
+							<div class="col-md-12">
+								<label for="ManufacturerId">Authorizing Manufacturer ID</label>
+								<input class="form-control" id="ManufacturerId" type="text" placeholder="Your MFR-ID" />
+							</div>
+						</div>
+						<div class="mt-5 text-end">
+							<button type="submit" class="btn-premium px-5" id="register">
+								<i class="fas fa-user-plus me-2"></i> Formalize Authorization
+							</button>
+						</div>
+					</div>
+
+					<div class="mt-4 p-4 glass-card border-0" style="background: rgba(13,202,240,0.03)">
+						<div class="d-flex gap-3 align-items-center">
+							<i class="fas fa-info-circle fa-2x text-info"></i>
+							<p class="text-muted small mb-0">Authorized sellers will gain cryptographic rights to
+								transfer ownership of products registered by your manufacturer ID.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Scripts -->
+	<script type="module" src="/js/seller-app.js"></script>
+</body>
+
+</html>

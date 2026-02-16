@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Admin Portal | AuthChain</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Modern Styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modern.css">
+    <style>
+        .form-control {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: none;
+        }
+
+        label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .table {
+            color: var(--text-main);
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 1rem 0.75rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-area mb-5">
+                <h3 class="text-gradient"><i class="fas fa-cubes me-2"></i>AuthChain</h3>
+                <small class="text-muted">Administrator Vault</small>
+            </div>
+
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link-modern">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="manufacturer-portal.html" class="nav-link-modern">
+                    <i class="fas fa-industry"></i> Manufacturer
+                </a>
+                <a href="seller-portal.html" class="nav-link-modern">
+                    <i class="fas fa-store"></i> Seller Portal
+                </a>
+                <a href="consumer-portal.html" class="nav-link-modern">
+                    <i class="fas fa-user-tag"></i> Consumer View
+                </a>
+                <a href="admin-portal.html" class="nav-link-modern active">
+                    <i class="fas fa-user-shield"></i> Admin Panel
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main-content animate-fade-in">
+            <header class="d-flex justify-content-between align-items-center mb-5">
+                <div>
+                    <h1 class="mb-1">Governance <span class="text-gradient">Console</span></h1>
+                    <p class="text-muted">Control manufacturer authorizations and system-wide security policies.</p>
+                </div>
+                <div class="badge bg-danger-soft text-danger p-2 px-3 rounded-pill border border-danger">
+                    <i class="fas fa-crown me-1"></i> Owner Access
+                </div>
+            </header>
+
+            <div class="row g-4">
+                <!-- Auth Card -->
+                <div class="col-lg-12">
+                    <div class="glass-card p-4">
+                        <h5 class="mb-4">Authorize New Manufacturer</h5>
+                        <div class="row g-3 align-items-end">
+                            <div class="col-md-9">
+                                <label for="manufacturerAddress">Manufacturer Wallet Address (0x...)</label>
+                                <input class="form-control py-2" id="manufacturerAddress" type="text"
+                                    placeholder="e.g. 0x123...456" />
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit"
+                                    class="btn-premium w-100 justify-content-center btn-add-manufacturer">
+                                    <i class="fas fa-user-check me-2"></i> Grant Authorization
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List Card -->
+                <div class="col-lg-12">
+                    <div class="glass-card p-0 overflow-hidden">
+                        <div class="p-4 border-bottom border-secondary border-opacity-10">
+                            <h5 class="mb-0">Authenticated Manufacturers</h5>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="ps-4">Manufacturer Wallet Address</th>
+                                        <th class="text-end pe-4">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="manufacturerList">
+                                    <tr>
+                                        <td colspan="2" class="text-center py-5 text-muted small">
+                                            <i class="fas fa-spinner fa-spin me-2"></i> Querying blockchain for
+                                            authorized accounts...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Notice -->
+            <div class="mt-5 glass-card" style="background: rgba(220,53,69,0.02)">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <p class="mb-1"><strong>Contract Ownership:</strong> <span id="ownerAdd"
+                                class="text-primary small">0x...</span></p>
+                        <p class="mb-0 text-muted small">Your Account: <span id="currentAdd"
+                                class="text-muted">0x...</span></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/js/admin-app.js"></script>
+</body>
+
+</html>

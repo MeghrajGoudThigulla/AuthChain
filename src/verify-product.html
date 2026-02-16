@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Verify Authenticity | AuthChain</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Modern Styling -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/modern.css">
+	<style>
+		#qr-reader {
+			border: 1px solid var(--glass-border) !important;
+			border-radius: 20px;
+			overflow: hidden;
+			background: var(--bg-darker);
+			position: relative;
+		}
+
+		#qr-reader__dashboard {
+			background: transparent !important;
+			color: var(--text-muted);
+		}
+
+		#qr-reader__status_span {
+			color: var(--primary);
+		}
+
+		.scanner-container {
+			position: relative;
+		}
+
+		/* Laser Animation */
+		.scanner-container::after {
+			content: '';
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			right: 20px;
+			height: 2px;
+			background: var(--primary);
+			box-shadow: 0 0 15px var(--primary);
+			animation: laserMove 2s infinite ease-in-out;
+			z-index: 10;
+			pointer-events: none;
+		}
+
+		@keyframes laserMove {
+
+			0%,
+			100% {
+				top: 20px;
+			}
+
+			50% {
+				top: calc(100% - 20px);
+			}
+		}
+
+		.form-control {
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px solid var(--glass-border);
+			color: white;
+			border-radius: 10px;
+		}
+
+		.form-control[readonly] {
+			background: rgba(0, 0, 0, 0.2);
+			border-style: dashed;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="app-container">
+		<!-- Sidebar -->
+		<aside class="sidebar">
+			<div class="logo-area mb-5">
+				<h3 class="text-gradient"><i class="fas fa-cubes me-2"></i>AuthChain</h3>
+				<small class="text-muted">Security Center</small>
+			</div>
+
+			<nav class="nav-links">
+				<a href="index.html" class="nav-link-modern">
+					<i class="fas fa-home"></i> Dashboard
+				</a>
+				<a href="manufacturer-portal.html" class="nav-link-modern">
+					<i class="fas fa-industry"></i> Manufacturer
+				</a>
+				<a href="seller-portal.html" class="nav-link-modern">
+					<i class="fas fa-store"></i> Seller Portal
+				</a>
+				<a href="consumer-portal.html" class="nav-link-modern active">
+					<i class="fas fa-user-tag"></i> Consumer View
+				</a>
+				<a href="admin-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-shield"></i> Admin Panel
+				</a>
+			</nav>
+		</aside>
+
+		<!-- Main Workspace -->
+		<main class="main-content animate-fade-in">
+			<header class="mb-5">
+				<a href="consumer-portal.html" class="text-muted text-decoration-none mb-3 d-inline-block">
+					<i class="fas fa-arrow-left me-2"></i> Back to Hub
+				</a>
+				<h1 class="mb-1">Product <span class="text-gradient">Verification</span></h1>
+				<p class="text-muted">Scan the QR code printed on the product to verify its cryptographic origin.</p>
+			</header>
+
+			<div class="row g-5">
+				<!-- Scanner Section -->
+				<div class="col-lg-6">
+					<div class="glass-card p-2 shadow-lg scanner-container">
+						<div id="qr-reader"></div>
+					</div>
+					<div id="qr-reader-results" class="mt-3 text-center text-muted small">
+						<i class="fas fa-info-circle me-1"></i> Scanner active. Align QR within frame.
+					</div>
+				</div>
+
+				<!-- Manual Entry & Results -->
+				<div class="col-lg-6">
+					<div class="glass-card mb-4">
+						<div class="row g-3">
+							<div class="col-12">
+								<label class="text-muted small mb-2">Scanned Serial Number</label>
+								<input type="text" class="form-control" id="productSN" placeholder="Waiting for scan..."
+									readonly>
+							</div>
+							<div class="col-12">
+								<label class="text-muted small mb-2">Consumer Authorization Code</label>
+								<input type="text" class="form-control" id="consumerCode"
+									placeholder="Enter your unique ID">
+							</div>
+						</div>
+						<div class="mt-4">
+							<button type="submit" class="btn-premium w-100 justify-content-center btn-register">
+								<i class="fas fa-search-location mr-2"></i> Verify Authenticity
+							</button>
+						</div>
+					</div>
+
+					<!-- Result Card -->
+					<div class="glass-card border-top border-primary border-3">
+						<h5 class="mb-3"><i class="fas fa-clipboard-check text-primary me-2"></i>Verification Report
+						</h5>
+						<div id="logdata" class="py-2">
+							<p class="text-muted italic small mb-0">Results will be parsed directly from the blockchain
+								state.</p>
+						</div>
+						<hr class="opacity-10">
+						<div class="d-flex justify-content-between align-items-center">
+							<small class="text-muted">Node Status: <span class="text-success">Synced</span></small>
+							<code id="add" class="text-primary small">0x...</code>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Scripts -->
+	<script src="https://unpkg.com/html5-qrcode"></script>
+	<script type="module">
+		import App from '/js/verify-product.js';
+
+		function onScanSuccess(decodedText) {
+			const audio = new Audio('/beep.wav');
+			audio.play().catch(e => console.log("Audio play blocked"));
+
+			document.getElementById('qr-reader-results').innerHTML = `<span class="text-primary fw-bold">Success!</span> Scanned: ${decodedText}`;
+			document.getElementById("productSN").value = decodedText;
+		}
+
+		window.addEventListener('DOMContentLoaded', () => {
+			const html5QrcodeScanner = new Html5QrcodeScanner(
+				"qr-reader",
+				{ fps: 15, qrbox: { width: 250, height: 250 } },
+				false
+			);
+			html5QrcodeScanner.render(onScanSuccess);
+		});
+	</script>
+</body>
+
+</html>

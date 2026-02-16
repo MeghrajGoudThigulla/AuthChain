@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Add Product | AuthChain</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Modern Styling -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/modern.css">
+	<style>
+		.form-control {
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px solid var(--glass-border);
+			color: white;
+			border-radius: 10px;
+		}
+
+		.form-control:focus {
+			background: rgba(255, 255, 255, 0.05);
+			border-color: var(--primary);
+			color: white;
+			box-shadow: none;
+		}
+
+		label {
+			color: var(--text-muted);
+			font-size: 0.85rem;
+			margin-bottom: 0.5rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="app-container">
+		<!-- Sidebar -->
+		<aside class="sidebar">
+			<div class="logo-area mb-5">
+				<h3 class="text-gradient"><i class="fas fa-cubes me-2"></i>AuthChain</h3>
+				<small class="text-muted">Production Portal</small>
+			</div>
+
+			<nav class="nav-links">
+				<a href="index.html" class="nav-link-modern">
+					<i class="fas fa-home"></i> Dashboard
+				</a>
+				<a href="manufacturer-portal.html" class="nav-link-modern active">
+					<i class="fas fa-industry"></i> Manufacturer
+				</a>
+				<a href="seller-portal.html" class="nav-link-modern">
+					<i class="fas fa-store"></i> Seller Portal
+				</a>
+				<a href="consumer-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-tag"></i> Consumer View
+				</a>
+				<a href="admin-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-shield"></i> Admin Panel
+				</a>
+			</nav>
+		</aside>
+
+		<!-- Main Workspace -->
+		<main class="main-content animate-fade-in">
+			<header class="mb-5">
+				<a href="manufacturer-portal.html" class="text-muted text-decoration-none mb-3 d-inline-block">
+					<i class="fas fa-arrow-left me-2"></i> Back to Manufacturer
+				</a>
+				<h1 class="mb-1">Register <span class="text-gradient">New Product</span></h1>
+				<p class="text-muted">Securely onboard genuine product data to the Polygon blockchain.</p>
+			</header>
+
+			<div class="row g-5">
+				<!-- Registration Form -->
+				<div class="col-lg-8">
+					<!-- Existing Single Register Card -->
+					<div class="glass-card p-4 mb-4">
+						<div class="d-flex justify-content-between align-items-center mb-4">
+							<h5 class="mb-0">Single Product Entry</h5>
+							<span class="badge bg-primary-soft text-primary">Standard</span>
+						</div>
+						<div class="row g-4">
+							<div class="col-md-6">
+								<label for="manufacturerID">Manufacturer ID</label>
+								<input class="form-control" id="manufacturerID" type="text"
+									placeholder="e.g. MFR-001" />
+							</div>
+							<div class="col-md-6">
+								<label for="productName">Product Name</label>
+								<input class="form-control" id="productName" type="text"
+									placeholder="e.g. Premium Watch" />
+							</div>
+							<div class="col-md-6">
+								<label for="productSN">Serial Number (Unique)</label>
+								<input class="form-control" id="productSN" type="text" placeholder="e.g. SN-987654" />
+							</div>
+							<div class="col-md-6">
+								<label for="productBrand">Brand</label>
+								<input class="form-control" id="productBrand" type="text"
+									placeholder="e.g. LuxuryBrand" />
+							</div>
+							<div class="col-md-6">
+								<label for="productPrice">Price (ETH/MATIC)</label>
+								<input class="form-control" id="productPrice" type="number" placeholder="0.05" />
+							</div>
+							<div class="col-md-6">
+								<label for="productImage">Product Image (IPFS)</label>
+								<input class="form-control pt-2" id="productImage" type="file" accept="image/*" />
+							</div>
+							<div class="col-12">
+								<label for="productDescription">Detailed Information</label>
+								<textarea class="form-control" id="productDescription" rows="3"
+									placeholder="Materials, warranty info, authentication details..."></textarea>
+							</div>
+						</div>
+						<div class="mt-5 text-end">
+							<button type="submit" class="btn-premium px-5" id="register" onclick="fetchQR()">
+								<i class="fas fa-plus me-2"></i> Register & Generate QR
+							</button>
+						</div>
+					</div>
+
+					<!-- New Bulk Register Card -->
+					<div class="glass-card p-4">
+						<div class="d-flex justify-content-between align-items-center mb-4">
+							<h5 class="mb-0">Bulk Registration <small class="text-muted">(Gas Efficient)</small></h5>
+							<span class="badge bg-success-soft text-success">Advanced</span>
+						</div>
+						<div class="mb-3">
+							<label for="bulkData">CSV Data (Name, SN, Brand, Price)</label>
+							<textarea class="form-control" id="bulkData" rows="5"
+								placeholder="Generic Watch, SN-BULK-001, LuxBrand, 0.05&#10;Generic Watch, SN-BULK-002, LuxBrand, 0.05"></textarea>
+						</div>
+						<div class="text-end">
+							<button type="button" class="btn-premium px-5" id="bulkRegister">
+								<i class="fas fa-layer-group me-2"></i> Batch Register
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- QR Display & Download -->
+				<div class="col-lg-4 text-center">
+					<div class="glass-card h-100 d-flex flex-column align-items-center justify-content-center p-4">
+						<div id="qrContainer" class="p-3 bg-white rounded shadow-lg mb-4" style="display: none;">
+							<img id="imgQR" src="" alt="qr-code" class="img-fluid" style="max-width: 200px;">
+						</div>
+						<div id="qrPlaceholder"
+							class="p-5 border border-dashed text-muted rounded opacity-50 mb-4 w-100">
+							<i class="fas fa-qrcode fa-4x mb-3"></i>
+							<p class="small">QR will appear here after registration</p>
+						</div>
+						<button hidden type="button" class="btn-premium w-100 justify-content-center" id="download"
+							onclick="saveImage()">
+							<i class="fas fa-download me-2"></i> Download QR
+						</button>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Scripts -->
+	<script type="module">
+		import App from '/js/product-app.js';
+		import QRCode from 'qrcode';
+		import { saveAs } from 'file-saver';
+
+		let qrDataUrl;
+		let qrValue;
+
+		window.fetchQR = async function () {
+			const manufacturerID = document.getElementById('manufacturerID').value;
+			qrValue = document.getElementById('productSN').value;
+
+			if (!qrValue || !manufacturerID) {
+				alert("Please enter Manufacturer ID and Serial Number.");
+				return;
+			}
+
+			// Institutional Standard: Signed-style payload prefix (simplistic for demo)
+			// Format: AUTHCHAIN:V1:MFR_ID:SN
+			const payload = `AUTHCHAIN:V1:${manufacturerID}:${qrValue}`;
+
+			const imgQR = document.getElementById('imgQR');
+			const qrContainer = document.getElementById('qrContainer');
+			const qrPlaceholder = document.getElementById('qrPlaceholder');
+			const downloadBtn = document.getElementById('download');
+
+			try {
+				// Generate QR locally (no external API leakage)
+				qrDataUrl = await QRCode.toDataURL(payload, {
+					width: 400,
+					margin: 2,
+					color: {
+						dark: '#000000',
+						light: '#ffffff'
+					}
+				});
+
+				imgQR.src = qrDataUrl;
+				qrContainer.style.display = 'block';
+				qrPlaceholder.style.display = 'none';
+				downloadBtn.removeAttribute('hidden');
+			} catch (err) {
+				console.error("QR Generation failed:", err);
+				alert("Failed to generate QR locally.");
+			}
+		};
+
+		window.saveImage = function () {
+			saveAs(qrDataUrl, `AuthChain_${qrValue}.png`);
+		};
+	</script>
+</body>
+
+</html>

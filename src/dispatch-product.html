@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Sell to Seller | AuthChain</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Modern Styling -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/modern.css">
+	<style>
+		.form-control {
+			background: rgba(255, 255, 255, 0.02);
+			border: 1px solid var(--glass-border);
+			color: white;
+			border-radius: 10px;
+		}
+
+		.form-control:focus {
+			background: rgba(255, 255, 255, 0.05);
+			border-color: var(--primary);
+			color: white;
+			box-shadow: none;
+		}
+
+		label {
+			color: var(--text-muted);
+			font-size: 0.85rem;
+			margin-bottom: 0.5rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="app-container">
+		<!-- Sidebar -->
+		<aside class="sidebar">
+			<div class="logo-area mb-5">
+				<h3 class="text-gradient"><i class="fas fa-cubes me-2"></i>AuthChain</h3>
+				<small class="text-muted">Distribution Portal</small>
+			</div>
+
+			<nav class="nav-links">
+				<a href="index.html" class="nav-link-modern">
+					<i class="fas fa-home"></i> Dashboard
+				</a>
+				<a href="manufacturer-portal.html" class="nav-link-modern active">
+					<i class="fas fa-industry"></i> Manufacturer
+				</a>
+				<a href="seller-portal.html" class="nav-link-modern">
+					<i class="fas fa-store"></i> Seller Portal
+				</a>
+				<a href="consumer-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-tag"></i> Consumer View
+				</a>
+				<a href="admin-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-shield"></i> Admin Panel
+				</a>
+			</nav>
+		</aside>
+
+		<!-- Main Workspace -->
+		<main class="main-content animate-fade-in">
+			<header class="mb-5">
+				<a href="manufacturer-portal.html" class="text-muted text-decoration-none mb-3 d-inline-block">
+					<i class="fas fa-arrow-left me-2"></i> Back to Manufacturer
+				</a>
+				<h1 class="mb-1">Distribution <span class="text-gradient">Transfer</span></h1>
+				<p class="text-muted">Initiate the transfer of product custody to an authorized seller on the
+					blockchain.</p>
+			</header>
+
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="glass-card p-5">
+						<div class="row g-4">
+							<div class="col-md-6">
+								<label for="productSN">Product Serial Number</label>
+								<input class="form-control" id="productSN" type="text" placeholder="e.g. SN-987654" />
+							</div>
+							<div class="col-md-6">
+								<label for="sellerCode">Target Seller Code</label>
+								<input class="form-control" id="sellerCode" type="text" placeholder="Enter Seller ID" />
+							</div>
+						</div>
+						<div class="mt-5 text-center">
+							<button type="submit" class="btn-premium px-5 py-3 btn-register" id="register">
+								<i class="fas fa-shipping-fast me-2"></i> Finalize Batch Transfer
+							</button>
+						</div>
+					</div>
+
+					<div class="mt-4 p-4 glass-card border-0" style="background: rgba(102,16,242,0.03)">
+						<div class="d-flex gap-3 align-items-center">
+							<i class="fas fa-link fa-2x text-primary"></i>
+							<p class="text-muted small mb-0">This step updates the product's status to "At Seller" and
+								logs the distributor's code into the immutable chain of custody.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Scripts -->
+	<script type="module" src="/js/dispatch-product.js"></script>
+</body>
+
+</html>

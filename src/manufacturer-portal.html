@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Manufacturer Dashboard | AuthChain</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Modern Styling -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/modern.css">
+</head>
+
+<body>
+	<div class="app-container">
+		<!-- Sidebar -->
+		<aside class="sidebar">
+			<div class="logo-area mb-5">
+				<h3 class="text-gradient"><i class="fas fa-cubes me-2"></i>AuthChain</h3>
+				<small class="text-muted">Manufacturer Portal</small>
+			</div>
+
+			<nav class="nav-links">
+				<a href="index.html" class="nav-link-modern">
+					<i class="fas fa-home"></i> Dashboard
+				</a>
+				<a href="manufacturer-portal.html" class="nav-link-modern active">
+					<i class="fas fa-industry"></i> Manufacturer
+				</a>
+				<a href="seller-portal.html" class="nav-link-modern">
+					<i class="fas fa-store"></i> Seller Portal
+				</a>
+				<a href="consumer-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-tag"></i> Consumer View
+				</a>
+				<a href="admin-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-shield"></i> Admin Panel
+				</a>
+			</nav>
+
+			<div class="mt-auto pt-5">
+				<div class="glass-card p-3 shadow-sm border-0" style="background: rgba(255,255,255,0.02)">
+					<small class="text-muted d-block mb-2">Connected Manufacturer</small>
+					<code id="userAddress" class="text-primary" style="font-size: 0.75rem;">Connecting...</code>
+				</div>
+			</div>
+		</aside>
+
+		<!-- Main Workspace -->
+		<main class="main-content animate-fade-in">
+			<header class="d-flex justify-content-between align-items-center mb-5">
+				<div>
+					<h1 class="mb-1">Manufacturer <span class="text-gradient">Console</span></h1>
+					<p class="text-muted">Manage your production line and authorized distributors.</p>
+				</div>
+				<div class="badge bg-warning-soft text-warning p-2 px-3 rounded-pill border border-warning">
+					<i class="fas fa-shield-alt me-1"></i> Authorized Manufacturer
+				</div>
+			</header>
+
+			<div class="row g-4">
+				<!-- Action Cards -->
+				<div class="col-md-4">
+					<div class="glass-card h-100 text-center p-4">
+						<div class="icon-box mb-4 mx-auto"
+							style="width: 60px; height: 60px; background: rgba(255,193,7,0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+							<i class="fas fa-plus-circle fa-2x text-warning"></i>
+						</div>
+						<h5>Register Product</h5>
+						<p class="small text-muted mb-4">Onboard new items to the blockchain with IPFS metadata.</p>
+						<a href="register-product.html" class="btn-premium w-100 justify-content-center">Go to Production</a>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="glass-card h-100 text-center p-4">
+						<div class="icon-box mb-4 mx-auto"
+							style="width: 60px; height: 60px; background: rgba(13,202,240,0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+							<i class="fas fa-user-plus fa-2x text-info"></i>
+						</div>
+						<h5>Manage Sellers</h5>
+						<p class="small text-muted mb-4">Authorize and query trusted resellers for your brand.</p>
+						<div class="d-flex gap-2">
+							<a href="register-seller.html" class="btn btn-outline-info w-50">Add</a>
+							<a href="seller-query.html" class="btn btn-outline-info w-50">Query</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="glass-card h-100 text-center p-4">
+						<div class="icon-box mb-4 mx-auto"
+							style="width: 60px; height: 60px; background: rgba(102,16,242,0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
+							<i class="fas fa-truck-loading fa-2x text-primary"></i>
+						</div>
+						<h5>Distribution</h5>
+						<p class="small text-muted mb-4">Finalize transfers of products to authorized sellers.</p>
+						<a href="dispatch-product.html" class="btn btn-outline-primary w-100">Sell to Seller</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Recent Productions -->
+			<div class="glass-card mt-5">
+				<h5 class="mb-4">Recent Production Batches</h5>
+				<div class="text-center py-4">
+					<p class="text-muted small">No recent batches found for this session.</p>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- Scripts -->
+	<script type="module">
+		import DApp from './js/dapp.js';
+		window.addEventListener('load', async () => {
+			await DApp.init();
+			document.getElementById('userAddress').innerText = DApp.account ?
+				DApp.account.substring(0, 8) + '...' + DApp.account.substring(38) : 'Not Connected';
+		});
+	</script>
+</body>
+
+</html>

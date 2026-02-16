@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Consumer Dashboard | AuthChain</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Modern Styling -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/modern.css">
+</head>
+
+<body>
+	<div class="app-container">
+		<!-- Sidebar -->
+		<aside class="sidebar">
+			<div class="logo-area mb-5">
+				<h3 class="text-gradient"><i class="fas fa-cubes me-2"></i>AuthChain</h3>
+				<small class="text-muted">Consumer Portal</small>
+			</div>
+
+			<nav class="nav-links">
+				<a href="index.html" class="nav-link-modern">
+					<i class="fas fa-home"></i> Dashboard
+				</a>
+				<a href="manufacturer-portal.html" class="nav-link-modern">
+					<i class="fas fa-industry"></i> Manufacturer
+				</a>
+				<a href="seller-portal.html" class="nav-link-modern">
+					<i class="fas fa-store"></i> Seller Portal
+				</a>
+				<a href="consumer-portal.html" class="nav-link-modern active">
+					<i class="fas fa-user-tag"></i> Consumer View
+				</a>
+				<a href="admin-portal.html" class="nav-link-modern">
+					<i class="fas fa-user-shield"></i> Admin Panel
+				</a>
+			</nav>
+
+			<div class="mt-auto pt-5">
+				<div class="glass-card p-3 shadow-sm border-0" style="background: rgba(255,255,255,0.02)">
+					<small class="text-muted d-block mb-2">My Connected Wallet</small>
+					<code id="userAddress" class="text-primary" style="font-size: 0.75rem;">Connecting...</code>
+				</div>
+			</div>
+		</aside>
+
+		<!-- Main Workspace -->
+		<main class="main-content animate-fade-in">
+			<header class="d-flex justify-content-between align-items-center mb-5">
+				<div>
+					<h1 class="mb-1">Consumer <span class="text-gradient">Hub</span></h1>
+					<p class="text-muted">Ensure transparency and trust for every product you purchase.</p>
+				</div>
+				<div class="badge bg-primary-soft text-primary p-2 px-3 rounded-pill border border-primary">
+					<i class="fas fa-check-circle me-1"></i> Verified Shopping
+				</div>
+			</header>
+
+			<div class="row g-4 justify-content-center">
+				<!-- Action Cards -->
+				<div class="col-md-5">
+					<div class="glass-card h-100 text-center p-5">
+						<div class="icon-box mb-4 mx-auto"
+							style="width: 80px; height: 80px; background: rgba(0,123,255,0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+							<i class="fas fa-shield-alt fa-3x text-primary"></i>
+						</div>
+						<h4>Verify Authenticity</h4>
+						<p class="text-muted mb-4">Instantly confirm if a product is genuine using its unique serial
+							number.</p>
+						<a href="verify-product.html" class="btn-premium w-100 justify-content-center">
+							<i class="fas fa-qrcode me-2"></i> Start Verification
+						</a>
+					</div>
+				</div>
+
+				<div class="col-md-5">
+					<div class="glass-card h-100 text-center p-5">
+						<div class="icon-box mb-4 mx-auto"
+							style="width: 80px; height: 80px; background: rgba(102,16,242,0.1); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+							<i class="fas fa-history fa-3x text-accent"></i>
+						</div>
+						<h4>Purchase History</h4>
+						<p class="text-muted mb-4">Access your decentralized history of verified products and ownership.
+						</p>
+						<a href="purchase-history.html" class="btn btn-outline-primary w-100 py-2">
+							View My History
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Dashboard Message -->
+			<div class="glass-card mt-5 text-center p-4">
+				<p class="text-muted small mb-0">
+					<i class="fas fa-info-circle me-2"></i>
+					All verifications are performed directly against the Polygon proof-of-work blockchain ledger.
+				</p>
+			</div>
+		</main>
+	</div>
+
+	<!-- Scripts -->
+	<script type="module" src="/js/main.js"></script>
+	<script type="module">
+		import DApp from './js/dapp.js';
+		window.addEventListener('load', async () => {
+			await DApp.init();
+			document.getElementById('userAddress').innerText = DApp.account ?
+				DApp.account.substring(0, 8) + '...' + DApp.account.substring(38) : 'Not Connected';
+		});
+	</script>
+</body>
+
+</html>
